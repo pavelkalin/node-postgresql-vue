@@ -6,6 +6,8 @@ module.exports = app => {
     // Get customer by ID
     router.get("/:id", customers.findOne)
 
+    // Create a new Customer
+    router.post("/", customers.create)
 
     app.use("/api/customers", router)
 }
