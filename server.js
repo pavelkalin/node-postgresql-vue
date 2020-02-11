@@ -25,7 +25,7 @@ db.sequelize.sync()
 
 // simple route
 app.get("/", (req, res) => {
-    res.json({message: "Hey Hey Hey."})
+    res.json({message: "Hey Hey Hey.", env: process.env})
 })
 
 require("./app/routes/customers.routes")(app)
