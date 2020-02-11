@@ -4,7 +4,6 @@ const Sequelize = require("sequelize")
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
-
   pool: {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,
@@ -12,7 +11,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     idle: dbConfig.pool.idle
   }
 })
-
+// new Sequelize(`postgres://${dbConfig.USER}:${dbConfig.PASSWORD}@${dbConfig.HOST}:5432/${dbConfig.DB}`, {
 const db = {}
 
 db.Sequelize = Sequelize

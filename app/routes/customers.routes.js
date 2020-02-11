@@ -6,5 +6,6 @@ module.exports = app => {
     // Get customer by ID
     router.get("/:id", customers.findOne)
 
+
     app.use("/api/customers", router)
 }
