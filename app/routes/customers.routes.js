@@ -12,5 +12,8 @@ module.exports = app => {
     // Update a Customers with id
     router.put("/:id", customers.update)
 
+    // Delete a Customers with id
+    router.delete("/:id", customers.delete)
+
     app.use("/api/customers", router)
 }
