@@ -2,4 +2,4 @@
 cd /home/pavel/simple_reshet
 git pull -f
 npm install
-pm2 restart server.js
+pm2 restart server.js --update-env
