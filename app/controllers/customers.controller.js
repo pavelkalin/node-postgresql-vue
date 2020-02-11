@@ -3,7 +3,6 @@ const Customers = db.customers
 const Op = db.Sequelize.Op
 const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 
-
 // Find a single Customers with an id
 exports.findOne = (req, res) => {
     const id = req.params.id
@@ -85,6 +84,67 @@ exports.create = (req, res) => {
             res.status(500).send({
                 message:
                     err.message || "Error while creation of customer"
+            })
+        })
+}
+
+// Update a customer by the id in the request
+exports.update = (req, res) => {
+    const id = req.params.id
+
+    //quick validation in update method also
+    if ('name' in req.body) {
+        if (!req.body.name) {
+            res.status(400).send({
+                message: "Name shouldn't be empty"
+            })
+            return
+        }
+    }
+
+    if ('phone' in req.body) {
+        if (!req.body.phone) {
+            res.status(400).send({
+                message: "Phone shouldn't be empty"
+            })
+            return
+        }
+
+
+        // Validate for e164 format
+        try {
+            if (!phoneUtil.isValidNumber(phoneUtil.parse(req.body.phone))) {
+                res.status(400).send({
+                    message: "Phone should be in e164 format"
+                })
+                return
+            }
+        } catch (e) {
+            res.status(400).send({
+                message: "Phone should be in e164 format"
+            })
+            return
+        }
+    }
+
+
+    Customers.update(req.body, {
+        where: {id: id}
+    })
+        .then(num => {
+            if (num[0] === 1) {
+                res.send({
+                    message: "Customers was updated successfully."
+                })
+            } else {
+                res.send({
+                    message: `Cannot update customer with id=${id}. Maybe Customers was not found or req.body is empty!`
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Customers with id=" + id
             })
         })
 }

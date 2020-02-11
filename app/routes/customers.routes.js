@@ -9,5 +9,8 @@ module.exports = app => {
     // Create a new Customer
     router.post("/", customers.create)
 
+    // Update a Customers with id
+    router.put("/:id", customers.update)
+
     app.use("/api/customers", router)
 }
