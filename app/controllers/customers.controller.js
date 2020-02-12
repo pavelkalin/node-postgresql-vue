@@ -31,43 +31,61 @@ exports.create = (req, res) => {
         return
     }
 
-    if (!req.body.email) {
+    if (!Array.isArray(req.body.email)) {
         res.status(400).send({
-            message: "Email shouldn't be empty"
+            message: "Email should be a list"
         })
         return
     }
 
-    if (!email_validator.validate(req.body.email)) {
+    if (!Array.isArray(req.body.phone)) {
         res.status(400).send({
-            message: "Email should be correct"
+            message: "Phone should be a list"
         })
         return
     }
 
+    for (let email of req.body.email) {
 
-    if (!req.body.phone) {
-        res.status(400).send({
-            message: "Phone shouldn't be empty"
-        })
-        return
+        if (!email) {
+            res.status(400).send({
+                message: "Email shouldn't be empty"
+            })
+            return
+        }
+
+
+        if (!email_validator.validate(email)) {
+            res.status(400).send({
+                message: "Email should be correct"
+            })
+            return
+        }
     }
+    for (let phone of req.body.phone) {
 
-    // Validate for e164 format
-    try {
-        if (!phoneUtil.isValidNumber(phoneUtil.parse(req.body.phone))) {
+        if (!phone) {
+            res.status(400).send({
+                message: "Phone shouldn't be empty"
+            })
+            return
+        }
+
+        // Validate for e164 format
+        try {
+            if (!phoneUtil.isValidNumber(phoneUtil.parse(phone))) {
+                res.status(400).send({
+                    message: "Phone should be in e164 format"
+                })
+                return
+            }
+        } catch (e) {
             res.status(400).send({
                 message: "Phone should be in e164 format"
             })
             return
         }
-    } catch (e) {
-        res.status(400).send({
-            message: "Phone should be in e164 format"
-        })
-        return
     }
-
     if (!req.body.contract_number) {
         res.status(400).send({
             message: "Contract number shouldn't be empty"
