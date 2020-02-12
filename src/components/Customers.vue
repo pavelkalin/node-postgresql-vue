@@ -81,6 +81,7 @@
 
                     </ul>
                 </div>
+
                 <div>
                     <label><strong>Contract number:</strong></label> {{ currentCustomer.contract_number }}
                 </div>
@@ -99,7 +100,7 @@
 </template>
 
 <script>
-    import CustomerDataService from "../services/CustomerDataService";
+    import CustomerDataService from "../services/CustomerDataService"
 
     export default {
         name: "customers-list",
@@ -111,37 +112,37 @@
                 name: "",
                 phone: "",
                 email: ""
-            };
+            }
         },
         methods: {
             retrieveCustomers() {
                 CustomerDataService.getAll()
                     .then(response => {
-                        this.customers = response.data;
-                        console.log(response.data);
+                        this.customers = response.data
+                        console.log(response.data)
                     })
                     .catch(e => {
-                        console.log(e);
-                    });
+                        console.log(e)
+                    })
             },
             refreshList() {
-                this.retrieveCustomers();
-                this.currentCustomer = null;
-                this.currentIndex = -1;
+                this.retrieveCustomers()
+                this.currentCustomer = null
+                this.currentIndex = -1
             },
             setActiveCustomer(customer, index) {
-                this.currentCustomer = customer;
-                this.currentIndex = index;
+                this.currentCustomer = customer
+                this.currentIndex = index
             },
             removeAllCustomers() {
                 CustomerDataService.deleteAll()
                     .then(response => {
-                        console.log(response.data);
-                        this.refreshList();
+                        console.log(response.data)
+                        this.refreshList()
                     })
                     .catch(e => {
-                        console.log(e);
-                    });
+                        console.log(e)
+                    })
             },
 
             searchName() {
@@ -149,12 +150,12 @@
                 this.email=''
                 CustomerDataService.findByName(this.name)
                     .then(response => {
-                        this.customers = response.data;
-                        console.log(response.data);
+                        this.customers = response.data
+                        console.log(response.data)
                     })
                     .catch(e => {
-                        console.log(e);
-                    });
+                        console.log(e)
+                    })
             },
 
             searchPhone() {
@@ -162,12 +163,12 @@
                 this.email=''
                 CustomerDataService.findByPhone(this.phone)
                     .then(response => {
-                        this.customers = response.data;
-                        console.log(response.data);
+                        this.customers = response.data
+                        console.log(response.data)
                     })
                     .catch(e => {
-                        console.log(e);
-                    });
+                        console.log(e)
+                    })
             },
 
             searchEmail() {
@@ -175,18 +176,18 @@
                 this.phone=''
                 CustomerDataService.findByEmail(this.email)
                     .then(response => {
-                        this.customers = response.data;
-                        console.log(response.data);
+                        this.customers = response.data
+                        console.log(response.data)
                     })
                     .catch(e => {
-                        console.log(e);
-                    });
+                        console.log(e)
+                    })
             }
         },
         mounted() {
-            this.retrieveCustomers();
+            this.retrieveCustomers()
         }
-    };
+    }
 </script>
 
 <style>

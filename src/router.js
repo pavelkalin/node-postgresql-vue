@@ -11,6 +11,12 @@ export default new Router({
             alias: "/customers",
             name: "customers",
             component: () => import("./components/Customers")
-        }
+        },
+        {
+            path: "/add",
+            name: "add",
+            component: () => import("./components/AddCustomer")
+        },
+
     ]
 })
