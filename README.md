@@ -1,27 +1,10 @@
-# simple_reshet
+# This is solution project for Home test
 
-This is default readme from vue cli, should be rewritten later
+## Implementation
 
+1. DB: Postgresql
+2. Back-end: Node.js, Express
+3. Front-end: Vue.js
 
-## Project setup
-```
-npm install
-```
+ 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

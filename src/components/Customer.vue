@@ -86,8 +86,8 @@
                 this.error_message=''
                 const data = {
                     name: this.currentCustomer.name,
-                    phone: this.currentCustomer.phone.split(","),
-                    email: this.currentCustomer.email.split(","),
+                    phone: this.currentCustomer.phone.replace(/\s/g,'').split(","),
+                    email: this.currentCustomer.email.replace(/\s/g,'').split(","),
                     contract_number: this.currentCustomer.contract_number
                 }
                 CustomerDataService.update(this.currentCustomer.id, data)

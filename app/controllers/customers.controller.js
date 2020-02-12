@@ -246,7 +246,7 @@ exports.delete = (req, res) => {
 // Retrieve all customers
 exports.findAll = (req, res) => {
     const name = req.query.name
-    const phone = req.query.phone ? `+${req.query.phone.trim()}` : null
+    const phone = req.query.phone ? `+${req.query.phone.replace(/\s/g,'')}` : null
     const email = req.query.email
     let condition = null
 
