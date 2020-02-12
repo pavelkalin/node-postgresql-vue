@@ -19,11 +19,9 @@ exports.findOne = (req, res) => {
         })
 }
 
-
 // create and save a new customer
 exports.create = (req, res) => {
 
-    // first simple validation
     if (!req.body.name) {
         res.status(400).send({
             message: "Name shouldn't be empty"
@@ -127,6 +125,14 @@ exports.update = (req, res) => {
         }
     }
 
+    if ('contract_number' in req.body) {
+        if (!req.body.contract_number) {
+            res.status(400).send({
+                message: "Contract number shouldn't be empty"
+            })
+            return
+        }
+    }
 
     if ('phone' in req.body) {
         if (!Array.isArray(req.body.phone)) {
@@ -167,6 +173,23 @@ exports.update = (req, res) => {
                 message: "Email should be a list"
             })
             return
+        }
+        for (let email of req.body.email) {
+
+            if (!email) {
+                res.status(400).send({
+                    message: "Email shouldn't be empty"
+                })
+                return
+            }
+
+
+            if (!email_validator.validate(email)) {
+                res.status(400).send({
+                    message: "Email should be correct"
+                })
+                return
+            }
         }
     }
 

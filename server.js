@@ -4,21 +4,21 @@ const cors = require("cors")
 
 const app = express()
 
-
-const whitelist = ['http://localhost:8080', 'http://test.pavelkalinichenko.me', 'http://localhost:3000', 'http://localhost']
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-}
-
+//
+// const whitelist = ['http://localhost:8080', 'http://test.pavelkalinichenko.me', 'http://localhost:3000', 'http://localhost']
 // const corsOptions = {
-//     origin: "http://test.pavelkalinichenko.me"
+//     origin: function (origin, callback) {
+//         if (whitelist.indexOf(origin) !== -1) {
+//             callback(null, true)
+//         } else {
+//             callback(new Error('Not allowed by CORS'))
+//         }
+//     }
 // }
+
+const corsOptions = {
+    origin: "http://test.pavelkalinichenko.me"
+}
 
 app.use(cors(corsOptions))
 

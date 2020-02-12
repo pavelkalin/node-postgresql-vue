@@ -100,8 +100,8 @@
             saveCustomer() {
                 const data = {
                     name: this.customer.name,
-                    phone: this.customer.phone.split(","),
-                    email: this.customer.email.split(","),
+                    phone: this.customer.phone ? this.customer.phone.split(",") : [''],
+                    email: this.customer.email ? this.customer.email.split(",") : [''],
                     contract_number: this.customer.contract_number
                 }
                 CustomerDataService.create(data)

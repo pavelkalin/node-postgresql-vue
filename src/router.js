@@ -17,6 +17,10 @@ export default new Router({
             name: "add",
             component: () => import("./components/AddCustomer")
         },
-
+        {
+            path: "/customers/:id",
+            name: "customer-details",
+            component: () => import("./components/Customer")
+        },
     ]
 })
