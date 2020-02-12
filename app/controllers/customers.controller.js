@@ -127,26 +127,44 @@ exports.update = (req, res) => {
         }
     }
 
+
     if ('phone' in req.body) {
-        if (!req.body.phone) {
+        if (!Array.isArray(req.body.phone)) {
             res.status(400).send({
-                message: "Phone shouldn't be empty"
+                message: "Phone should be a list"
             })
             return
         }
+        for (let phone of req.body.phone) {
 
+            if (!phone) {
+                res.status(400).send({
+                    message: "Phone shouldn't be empty"
+                })
+                return
+            }
 
-        // Validate for e164 format
-        try {
-            if (!phoneUtil.isValidNumber(phoneUtil.parse(req.body.phone))) {
+            // Validate for e164 format
+            try {
+                if (!phoneUtil.isValidNumber(phoneUtil.parse(phone))) {
+                    res.status(400).send({
+                        message: "Phone should be in e164 format"
+                    })
+                    return
+                }
+            } catch (e) {
                 res.status(400).send({
                     message: "Phone should be in e164 format"
                 })
                 return
             }
-        } catch (e) {
+        }
+    }
+
+    if ('email' in req.body) {
+        if (!Array.isArray(req.body.email)) {
             res.status(400).send({
-                message: "Phone should be in e164 format"
+                message: "Email should be a list"
             })
             return
         }

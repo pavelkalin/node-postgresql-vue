@@ -26,18 +26,27 @@
                 </li>
             </ul>
 
-<!--            <button class="m-3 btn btn-sm btn-danger" @click="removeAllCustomers">-->
-<!--                Remove All-->
-<!--            </button>-->
+            <!--            <button class="m-3 btn btn-sm btn-danger" @click="removeAllCustomers">-->
+            <!--                Remove All-->
+            <!--            </button>-->
         </div>
         <div class="col-md-6">
             <div v-if="currentCustomer">
                 <h4>Customer</h4>
                 <div>
-                    <label><strong>Name:</strong></label> {{ currentCustomer.name }}
+                    <label><strong>Name:</strong></label>
+                    {{ currentCustomer.name }}
                 </div>
                 <div>
-                    <label><strong>Phone:</strong></label> {{ currentCustomer.phone }}
+                    <label><strong>Phone:</strong></label>
+                    <ul class="list-group">
+                        <li class="list-group-item"
+                            v-for="(phone, index) in currentCustomer.phone"
+                            :key="index"
+                        >{{phone}}
+                        </li>
+
+                    </ul>
                 </div>
                 <div>
                     <label><strong>Email:</strong></label> {{ currentCustomer.email }}
