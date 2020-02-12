@@ -126,7 +126,7 @@
                     })
             },
             refreshList() {
-                this.retrieveCustomers()
+                // this.retrieveCustomers()
                 this.currentCustomer = null
                 this.currentIndex = -1
             },
@@ -148,6 +148,7 @@
             searchName() {
                 this.phone=''
                 this.email=''
+                this.refreshList()
                 CustomerDataService.findByName(this.name)
                     .then(response => {
                         this.customers = response.data
@@ -156,11 +157,13 @@
                     .catch(e => {
                         console.log(e)
                     })
+                this.refreshList()
             },
 
             searchPhone() {
                 this.name=''
                 this.email=''
+                this.refreshList()
                 CustomerDataService.findByPhone(this.phone)
                     .then(response => {
                         this.customers = response.data
@@ -174,6 +177,7 @@
             searchEmail() {
                 this.name=''
                 this.phone=''
+                this.refreshList()
                 CustomerDataService.findByEmail(this.email)
                     .then(response => {
                         this.customers = response.data
