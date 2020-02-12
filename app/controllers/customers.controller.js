@@ -223,11 +223,12 @@ exports.delete = (req, res) => {
 // Retrieve all customers
 exports.findAll = (req, res) => {
     const name = req.query.name
-    const phone = req.query.phone
+    const phone = req.query.phone ? `+${req.query.phone.trim()}` : null
     const email = req.query.email
     let condition = null
 
-    
+
+    console.log(phone);
     // condition = {email: { [Op.contains]: [`${email}`] }}
     //condition = {[Op.and]: [{name: {[Op.iLike]: `%${name}%`}}, {email: {[Op.iLike]: `%${email}%`}}]}
 

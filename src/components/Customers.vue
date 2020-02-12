@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search by name"
+                <input type="text" class="form-control" placeholder="Search by phone"
                        v-model="phone"/>
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button"
