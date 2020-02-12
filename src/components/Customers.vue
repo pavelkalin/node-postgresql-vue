@@ -97,7 +97,8 @@
                 customers: [],
                 currentCustomer: null,
                 currentIndex: -1,
-                name: ""
+                name: "",
+                phone: ""
             };
         },
         methods: {
@@ -143,7 +144,7 @@
             },
 
             searchPhone() {
-                CustomerDataService.findByPhone(this.name)
+                CustomerDataService.findByPhone(this.phone)
                     .then(response => {
                         this.customers = response.data;
                         console.log(response.data);

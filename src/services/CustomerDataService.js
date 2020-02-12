@@ -10,7 +10,7 @@ class CustomerDataService {
     }
 
     findByPhone(phone) {
-        return http.get(`/customers?name=${phone}`);
+        return http.get(`/customers?phone=${phone}`);
     }
 }
 
