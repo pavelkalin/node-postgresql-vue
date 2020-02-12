@@ -8,6 +8,10 @@ class CustomerDataService {
     findByName(name) {
         return http.get(`/customers?name=${name}`);
     }
+
+    findByPhone(phone) {
+        return http.get(`/customers?name=${phone}`);
+    }
 }
 
 export default new CustomerDataService()

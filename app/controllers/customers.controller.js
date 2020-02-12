@@ -227,20 +227,24 @@ exports.findAll = (req, res) => {
     const email = req.query.email
     let condition = null
 
+    
+    // condition = {email: { [Op.contains]: [`${email}`] }}
+    //condition = {[Op.and]: [{name: {[Op.iLike]: `%${name}%`}}, {email: {[Op.iLike]: `%${email}%`}}]}
+
     if (('name' in req.query) && ('email' in req.query) && ('phone' in req.query)) {
-        condition = {[Op.and]: [{name: {[Op.iLike]: `%${name}%`}}, {email: {[Op.iLike]: `%${email}%`}}, {phone: {[Op.iLike]: `%${phone}%`}}]}
+        condition = {[Op.and]: [{name: {[Op.iLike]: `%${name}%`}}, {email: {[Op.contains]: [`${email}`]}}, {phone: {[Op.contains]: [`${phone}`]}}]}
     } else if (('name' in req.query) && ('email' in req.query)) {
-        condition = {[Op.and]: [{name: {[Op.iLike]: `%${name}%`}}, {email: {[Op.iLike]: `%${email}%`}}]}
+        condition = {[Op.and]: [{name: {[Op.iLike]: `%${name}%`}}, {email: {[Op.contains]: [`${email}`]}}]}
     } else if (('name' in req.query) && ('phone' in req.query)) {
-        condition = {[Op.and]: [{name: {[Op.iLike]: `%${name}%`}}, {phone: {[Op.iLike]: `%${phone}%`}}]}
+        condition = {[Op.and]: [{name: {[Op.iLike]: `%${name}%`}}, {phone: {[Op.contains]: [`${phone}`]}}]}
     } else if (('email' in req.query) && ('phone' in req.query)) {
-        condition = {[Op.and]: [{email: {[Op.iLike]: `%${email}%`}}, {phone: {[Op.iLike]: `%${phone}%`}}]}
+        condition = {[Op.and]: [{email: {[Op.contains]: [`${email}`]}}, {phone: {[Op.contains]: [`${phone}`]}}]}
     } else if ('name' in req.query) {
         condition = {name: {[Op.iLike]: `%${name}%`}}
     } else if ('phone' in req.query) {
-        condition = {phone: {[Op.iLike]: `%${phone}%`}}
+        condition = {phone: {[Op.contains]: [`${phone}`]}}
     } else if ('email' in req.query) {
-        condition = {email: {[Op.iLike]: `%${email}%`}}
+        condition = {email: {[Op.contains]: [`${email}`]}}
     }
 
     const validator = require("email-validator")

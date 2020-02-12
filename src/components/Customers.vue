@@ -12,6 +12,17 @@
                     </button>
                 </div>
             </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search by name"
+                       v-model="phone"/>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button"
+                            @click="searchPhone"
+                    >
+                        Search
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="col-md-6">
             <h4>Customers List</h4>
@@ -49,7 +60,15 @@
                     </ul>
                 </div>
                 <div>
-                    <label><strong>Email:</strong></label> {{ currentCustomer.email }}
+                    <label><strong>Email:</strong></label>
+                    <ul class="list-group">
+                        <li class="list-group-item"
+                            v-for="(email, index) in currentCustomer.email"
+                            :key="index"
+                        >{{email}}
+                        </li>
+
+                    </ul>
                 </div>
                 <div>
                     <label><strong>Contract number:</strong></label> {{ currentCustomer.contract_number }}
@@ -114,6 +133,17 @@
 
             searchName() {
                 CustomerDataService.findByName(this.name)
+                    .then(response => {
+                        this.customers = response.data;
+                        console.log(response.data);
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+            },
+
+            searchPhone() {
+                CustomerDataService.findByPhone(this.name)
                     .then(response => {
                         this.customers = response.data;
                         console.log(response.data);
