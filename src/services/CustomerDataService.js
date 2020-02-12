@@ -12,6 +12,10 @@ class CustomerDataService {
     findByPhone(phone) {
         return http.get(`/customers?phone=${phone}`);
     }
+
+    findByEmail(email) {
+        return http.get(`/customers?email=${email}`);
+    }
 }
 
 export default new CustomerDataService()

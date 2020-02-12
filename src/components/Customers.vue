@@ -23,6 +23,17 @@
                     </button>
                 </div>
             </div>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search by email"
+                       v-model="email"/>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button"
+                            @click="searchEmail"
+                    >
+                        Search
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="col-md-6">
             <h4>Customers List</h4>
@@ -98,7 +109,8 @@
                 currentCustomer: null,
                 currentIndex: -1,
                 name: "",
-                phone: ""
+                phone: "",
+                email: ""
             };
         },
         methods: {
@@ -133,6 +145,8 @@
             },
 
             searchName() {
+                this.phone=''
+                this.email=''
                 CustomerDataService.findByName(this.name)
                     .then(response => {
                         this.customers = response.data;
@@ -144,7 +158,22 @@
             },
 
             searchPhone() {
+                this.name=''
+                this.email=''
                 CustomerDataService.findByPhone(this.phone)
+                    .then(response => {
+                        this.customers = response.data;
+                        console.log(response.data);
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+            },
+
+            searchEmail() {
+                this.name=''
+                this.phone=''
+                CustomerDataService.findByEmail(this.email)
                     .then(response => {
                         this.customers = response.data;
                         console.log(response.data);
