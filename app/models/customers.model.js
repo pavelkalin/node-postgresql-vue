@@ -4,10 +4,10 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.STRING
             },
             phone: {
-                type: Sequelize.STRING
+                type: Sequelize.ARRAY(Sequelize.STRING)
             },
             email: {
-                type: Sequelize.STRING
+                type: Sequelize.ARRAY(Sequelize.STRING)
             },
             contract_number: {
                 type: Sequelize.STRING
