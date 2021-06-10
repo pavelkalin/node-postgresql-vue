@@ -4,7 +4,7 @@
             {{error_message}}
         </div>
 
-        <h4>Customer</h4>
+      <h4><i>Customer</i></h4>
         <form>
             <div class="form-group">
                 <label for="name">Name</label>
